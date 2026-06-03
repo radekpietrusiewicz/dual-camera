@@ -14,25 +14,33 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.5'
-      - name: Generate missing Android files
+      - name: Setup project
         run: |
           cp -r lib /tmp/lib_backup
           cp pubspec.yaml /tmp/pubspec_backup.yaml
           flutter create . --project-name dual_camera_app --org com.example
           cp -r /tmp/lib_backup/. lib/
           cp /tmp/pubspec_backup.yaml pubspec.yaml
-      - name: Fix dart imports
+      - name: Switch to saver_gallery
         run: |
-          find lib -name "*.dart" -exec sed -i "s|import 'package:gal/gal.dart';|import 'package:image_gallery_saver/image_gallery_saver.dart';|g" {} \;
-          find lib -name "*.dart" -exec sed -i "s|Gal.putImage(|ImageGallerySaver.saveFile(|g" {} \;
-          find lib -name "*.dart" -exec sed -i "s|Gal.putVideo(|ImageGallerySaver.saveFile(|g" {} \;
+          python3 << 'PYEOF'
+          import re
+          with open('pubspec.yaml', 'r') as f:
+              content = f.read()
+          content = re.sub(r'  (gal|image_gallery_saver)[^\n]+\n', '  saver_gallery: ^3.0.6\n', content)
+          with open('pubspec.yaml', 'w') as f:
+              f.write(content)
+          print("pubspec.yaml updated")
+          with open('lib/screens/dual_camera_screen.dart', 'r') as f:
+              dart = f.read()
+          dart = dart.replace("import 'package:gal/gal.dart';", "import 'package:saver_gallery/saver_gallery.dart';")
+          dart = dart.replace("import 'package:image_gallery_saver/image_gallery_saver.dart';", "import 'package:saver_gallery/saver_gallery.dart';")
+          dart = re.sub(r'ImageGallerySaver\.saveFile\((\w+)\.path\)', r"SaverGallery.saveFile(file: \1.path, name: p.basename(\1.path), androidRelativePath: 'Pictures/DualCamera')", dart)
+          with open('lib/screens/dual_camera_screen.dart', 'w') as f:
+              f.write(dart)
+          print("dart code updated")
+          PYEOF
       - run: flutter pub get
-      - name: Fix image_gallery_saver namespace
-        run: |
-          PLUGIN=$(find ~/.pub-cache -path "*/image_gallery_saver*/android/build.gradle" 2>/dev/null | head -1)
-          if [ -n "$PLUGIN" ]; then
-            sed -i '/^android {/a\    namespace "com.example.imagegallerysaver"' "$PLUGIN"
-          fi
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
