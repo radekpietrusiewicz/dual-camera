@@ -21,7 +21,18 @@ jobs:
           flutter create . --project-name dual_camera_app --org com.example
           cp -r /tmp/lib_backup/. lib/
           cp /tmp/pubspec_backup.yaml pubspec.yaml
+      - name: Fix dart imports
+        run: |
+          find lib -name "*.dart" -exec sed -i "s|import 'package:gal/gal.dart';|import 'package:image_gallery_saver/image_gallery_saver.dart';|g" {} \;
+          find lib -name "*.dart" -exec sed -i "s|Gal.putImage(|ImageGallerySaver.saveFile(|g" {} \;
+          find lib -name "*.dart" -exec sed -i "s|Gal.putVideo(|ImageGallerySaver.saveFile(|g" {} \;
       - run: flutter pub get
+      - name: Fix image_gallery_saver namespace
+        run: |
+          PLUGIN=$(find ~/.pub-cache -path "*/image_gallery_saver*/android/build.gradle" 2>/dev/null | head -1)
+          if [ -n "$PLUGIN" ]; then
+            sed -i '/^android {/a\    namespace "com.example.imagegallerysaver"' "$PLUGIN"
+          fi
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
