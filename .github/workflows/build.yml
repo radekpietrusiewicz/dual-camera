@@ -62,9 +62,9 @@ jobs:
       - name: Build APK
         run: |
           cd dual_camera_app
-          flutter build apk --release --no-tree-shake-icons
+          flutter build apk --debug --no-tree-shake-icons
 
       - uses: actions/upload-artifact@v4
         with:
           name: dual-camera-app
-          path: dual_camera_app/build/app/outputs/flutter-apk/app-release.apk
+          path: dual_camera_app/build/app/outputs/flutter-apk/app-debug.apk
