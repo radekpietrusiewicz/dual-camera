@@ -36,7 +36,7 @@ jobs:
 
       - name: Write pubspec.yaml
         run: |
-          echo "bmFtZTogZHVhbF9jYW1lcmFfYXBwCmRlc2NyaXB0aW9uOiBEdWFsIENhbWVyYSBBcHAKcHVibGlzaF90bzogJ25vbmUnCnZlcnNpb246IDEuMC4wKzEKZW52aXJvbm1lbnQ6CiAgc2RrOiAnPj0zLjAuMCA8NC4wLjAnCmRlcGVuZGVuY2llczoKICBmbHV0dGVyOgogICAgc2RrOiBmbHV0dGVyCiAgY2FtZXJhOiBeMC4xMC45CiAgcGF0aF9wcm92aWRlcjogXjIuMS4yCiAgcGF0aDogXjEuOS4wCmRldl9kZXBlbmRlbmNpZXM6CiAgZmx1dHRlcl90ZXN0OgogICAgc2RrOiBmbHV0dGVyCiAgZmx1dHRlcl9saW50czogXjQuMC4wCmZsdXR0ZXI6CiAgdXNlcy1tYXRlcmlhbC1kZXNpZ246IHRydWUK" | base64 -d > dual_camera_app/pubspec.yaml
+          echo "bmFtZTogZHVhbF9jYW1lcmFfYXBwCmRlc2NyaXB0aW9uOiBEdWFsIENhbWVyYSBBcHAKcHVibGlzaF90bzogJ25vbmUnCnZlcnNpb246IDEuMC4wKzEKZW52aXJvbm1lbnQ6CiAgc2RrOiAnPj0zLjAuMCA8NC4wLjAnCmRlcGVuZGVuY2llczoKICBmbHV0dGVyOgogICAgc2RrOiBmbHV0dGVyCiAgY2FtZXJhOiBeMC4xMS4wCiAgcGF0aF9wcm92aWRlcjogXjIuMS4yCiAgcGF0aDogXjEuOS4wCmRldl9kZXBlbmRlbmNpZXM6CiAgZmx1dHRlcl90ZXN0OgogICAgc2RrOiBmbHV0dGVyCiAgZmx1dHRlcl9saW50czogXjQuMC4wCmZsdXR0ZXI6CiAgdXNlcy1tYXRlcmlhbC1kZXNpZ246IHRydWUK" | base64 -d > dual_camera_app/pubspec.yaml
 
       - name: Write AndroidManifest.xml
         run: |
