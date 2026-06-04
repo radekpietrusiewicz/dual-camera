@@ -26,7 +26,7 @@ jobs:
           echo "$B64" | base64 -d > lib/main.dart
       - name: Write pubspec.yaml
         run: |
-          B64=bmFtZTogZHVhbF9jYW1lcmFfYXBwCmRlc2NyaXB0aW9uOiBEdWFsIENhbWVyYSBBcHAKcHVibGlzaF90bzogJ25vbmUnCnZlcnNpb246IDEuMC4wKzEKZW52aXJvbm1lbnQ6CiAgc2RrOiAnPj0zLjAuMCA8NC4wLjAnCmRlcGVuZGVuY2llczoKICBmbHV0dGVyOgogICAgc2RrOiBmbHV0dGVyCiAgY2FtZXJhOiBeMS4wLjAKICBwYXRoX3Byb3ZpZGVyOiBeMi4xLjIKICBwYXRoOiBeMS45LjAKICBwZXJtaXNzaW9uX2hhbmRsZXI6IF4xMS4zLjAKZGV2X2RlcGVuZGVuY2llczoKICBmbHV0dGVyX3Rlc3Q6CiAgICBzZGs6IGZsdXR0ZXIKICBmbHV0dGVyX2xpbnRzOiBeNC4wLjAKZmx1dHRlcjoKICB1c2VzLW1hdGVyaWFsLWRlc2lnbjogdHJ1ZQo=
+          B64=bmFtZTogZHVhbF9jYW1lcmFfYXBwCmRlc2NyaXB0aW9uOiBEdWFsIENhbWVyYSBBcHAKcHVibGlzaF90bzogJ25vbmUnCnZlcnNpb246IDEuMC4wKzEKZW52aXJvbm1lbnQ6CiAgc2RrOiAnPj0zLjAuMCA8NC4wLjAnCmRlcGVuZGVuY2llczoKICBmbHV0dGVyOgogICAgc2RrOiBmbHV0dGVyCiAgY2FtZXJhOiBeMC4xMC42CiAgcGF0aF9wcm92aWRlcjogXjIuMS4yCiAgcGF0aDogXjEuOS4wCiAgcGVybWlzc2lvbl9oYW5kbGVyOiBeMTEuMy4wCmRldl9kZXBlbmRlbmNpZXM6CiAgZmx1dHRlcl90ZXN0OgogICAgc2RrOiBmbHV0dGVyCiAgZmx1dHRlcl9saW50czogXjQuMC4wCmZsdXR0ZXI6CiAgdXNlcy1tYXRlcmlhbC1kZXNpZ246IHRydWUK
           echo "$B64" | base64 -d > pubspec.yaml
       - name: Write AndroidManifest.xml
         run: |
