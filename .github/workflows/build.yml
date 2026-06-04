@@ -21,6 +21,10 @@ jobs:
         with:
           channel: stable
 
+      - name: Install Android SDK 35
+        run: |
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0" || true
+
       - name: Create Flutter project
         run: flutter create dual_camera_app --platforms android
 
@@ -55,9 +59,6 @@ jobs:
       - name: Write AndroidManifest.xml
         run: echo "PG1hbmlmZXN0IHhtbG5zOmFuZHJvaWQ9Imh0dHA6Ly9zY2hlbWFzLmFuZHJvaWQuY29tL2Fway9yZXMvYW5kcm9pZCI+CiAgICA8dXNlcy1wZXJtaXNzaW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5wZXJtaXNzaW9uLkNBTUVSQSIvPgogICAgPHVzZXMtcGVybWlzc2lvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQucGVybWlzc2lvbi5SRUNPUkRfQVVESU8iLz4KICAgIDx1c2VzLXBlcm1pc3Npb24gYW5kcm9pZDpuYW1lPSJhbmRyb2lkLnBlcm1pc3Npb24uUkVBRF9NRURJQV9JTUFHRVMiLz4KICAgIDx1c2VzLXBlcm1pc3Npb24gYW5kcm9pZDpuYW1lPSJhbmRyb2lkLnBlcm1pc3Npb24uUkVBRF9NRURJQV9WSURFTyIvPgogICAgPGFwcGxpY2F0aW9uCiAgICAgICAgYW5kcm9pZDpsYWJlbD0iRHVhbENhbWVyYSIKICAgICAgICBhbmRyb2lkOm5hbWU9IiR7YXBwbGljYXRpb25OYW1lfSIKICAgICAgICBhbmRyb2lkOmljb249IkBtaXBtYXAvaWNfbGF1bmNoZXIiCiAgICAgICAgYW5kcm9pZDpyZXF1ZXN0TGVnYWN5RXh0ZXJuYWxTdG9yYWdlPSJ0cnVlIj4KICAgICAgICA8YWN0aXZpdHkKICAgICAgICAgICAgYW5kcm9pZDpuYW1lPSIuTWFpbkFjdGl2aXR5IgogICAgICAgICAgICBhbmRyb2lkOmV4cG9ydGVkPSJ0cnVlIgogICAgICAgICAgICBhbmRyb2lkOmxhdW5jaE1vZGU9InNpbmdsZVRvcCIKICAgICAgICAgICAgYW5kcm9pZDp0YXNrQWZmaW5pdHk9IiIKICAgICAgICAgICAgYW5kcm9pZDp0aGVtZT0iQHN0eWxlL0xhdW5jaFRoZW1lIgogICAgICAgICAgICBhbmRyb2lkOmNvbmZpZ0NoYW5nZXM9Im9yaWVudGF0aW9ufGtleWJvYXJkSGlkZGVufGtleWJvYXJkfHNjcmVlblNpemV8c21hbGxlc3RTY3JlZW5TaXplfGxvY2FsZXxsYXlvdXREaXJlY3Rpb258Zm9udFNjYWxlfHNjcmVlbkxheW91dHxkZW5zaXR5fHVpTW9kZSIKICAgICAgICAgICAgYW5kcm9pZDpoYXJkd2FyZUFjY2VsZXJhdGVkPSJ0cnVlIgogICAgICAgICAgICBhbmRyb2lkOndpbmRvd1NvZnRJbnB1dE1vZGU9ImFkanVzdFJlc2l6ZSI+CiAgICAgICAgICAgIDxtZXRhLWRhdGEKICAgICAgICAgICAgICBhbmRyb2lkOm5hbWU9ImlvLmZsdXR0ZXIuZW1iZWRkaW5nLmFuZHJvaWQuTm9ybWFsVGhlbWUiCiAgICAgICAgICAgICAgYW5kcm9pZDpyZXNvdXJjZT0iQHN0eWxlL05vcm1hbFRoZW1lIi8+CiAgICAgICAgICAgIDxpbnRlbnQtZmlsdGVyPgogICAgICAgICAgICAgICAgPGFjdGlvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQuaW50ZW50LmFjdGlvbi5NQUlOIi8+CiAgICAgICAgICAgICAgICA8Y2F0ZWdvcnkgYW5kcm9pZDpuYW1lPSJhbmRyb2lkLmludGVudC5jYXRlZ29yeS5MQVVOQ0hFUiIvPgogICAgICAgICAgICA8L2ludGVudC1maWx0ZXI+CiAgICAgICAgPC9hY3Rpdml0eT4KICAgICAgICA8bWV0YS1kYXRhCiAgICAgICAgICAgIGFuZHJvaWQ6bmFtZT0iZmx1dHRlckVtYmVkZGluZyIKICAgICAgICAgICAgYW5kcm9pZDp2YWx1ZT0iMiIvPgogICAgPC9hcHBsaWNhdGlvbj4KICAgIDxxdWVyaWVzPgogICAgICAgIDxpbnRlbnQ+CiAgICAgICAgICAgIDxhY3Rpb24gYW5kcm9pZDpuYW1lPSJhbmRyb2lkLmludGVudC5hY3Rpb24uUFJPQ0VTU19URVhUIi8+CiAgICAgICAgICAgIDxkYXRhIGFuZHJvaWQ6bWltZVR5cGU9InRleHQvcGxhaW4iLz4KICAgICAgICA8L2ludGVudD4KICAgIDwvcXVlcmllcz4KPC9tYW5pZmVzdD4K" | base64 -d > dual_camera_app/android/app/src/main/AndroidManifest.xml
 
-      - name: Install SDK 34
-        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
-
       - name: Write build.gradle
         run: |
           cat > dual_camera_app/android/app/build.gradle << 'GRADLEOF'
@@ -68,7 +69,8 @@ jobs:
           }
           android {
               namespace "com.example.dual_camera_app"
-              compileSdk 34
+              compileSdk 35
+              buildToolsVersion "35.0.0"
               ndkVersion flutter.ndkVersion
               compileOptions {
                   sourceCompatibility JavaVersion.VERSION_1_8
@@ -80,7 +82,7 @@ jobs:
               defaultConfig {
                   applicationId "com.example.dual_camera_app"
                   minSdk 21
-                  targetSdk 34
+                  targetSdk 35
                   versionCode flutter.versionCode
                   versionName flutter.versionName
               }
